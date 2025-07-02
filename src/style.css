@@ -1,11 +1,30 @@
 :root {
-  font-family: 'Microsoft YaHei', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Microsoft YaHei', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
+  /* 现代配色方案 */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --accent-color: #06d6a0;
+  --background-primary: #0f172a;
+  --background-secondary: #1e293b;
+  --background-tertiary: #334155;
+  --surface-card: #1e293b;
+  --border-color: #475569;
+  --border-accent: #64748b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--background-primary) 0%, #1a1a2e 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,141 +42,342 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow: hidden;
+  background: var(--background-primary);
 }
 
 #app {
   display: flex;
   height: 100vh;
   width: 100vw;
+  gap: 2px;
 }
 
 #controls {
-  width: 300px;
-  background-color: #2a2a2a;
-  padding: 20px;
+  width: 350px;
+  background: var(--background-secondary);
+  padding: 24px;
   overflow-y: auto;
-  border-right: 1px solid #444;
+  border-right: 2px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+#controls::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 #controls h1 {
-  color: #fff;
-  margin-bottom: 20px;
-  font-size: 24px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
   text-align: center;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--surface-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.control-group:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.control-group:hover::before {
+  opacity: 1;
 }
 
 .control-group label {
   display: block;
-  color: #ccc;
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
 }
 
 .control-group input[type="text"],
 .control-group select {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #333;
-  color: #fff;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
   font-size: 14px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .control-group input[type="text"]:focus,
 .control-group select:focus {
   outline: none;
-  border-color: #646cff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: var(--background-secondary);
 }
 
 .control-group select option {
-  background-color: #333;
-  color: #fff;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  padding: 8px;
 }
 
 .control-group input[type="range"] {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+#subdivision-value {
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 16px;
 }
 
 button {
   width: 100%;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #555;
-  padding: 10px 16px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  padding: 14px 20px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #646cff;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.025em;
+  box-shadow: var(--shadow-md);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 button:hover {
-  background-color: #535bf2;
-  border-color: #535bf2;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 2px solid #646cff;
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+button#toggle-riemann {
+  background: linear-gradient(135deg, var(--accent-color), #05b894);
+}
+
+button#toggle-riemann:hover {
+  background: linear-gradient(135deg, #05b894, var(--accent-color));
 }
 
 #canvas-container {
   flex: 1;
   position: relative;
-  background-color: #000;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, var(--background-primary) 100%);
+  border-radius: 0 12px 12px 0;
+  overflow: hidden;
+  box-shadow: inset var(--shadow-xl);
 }
 
 .info {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #333;
-  border-radius: 6px;
-  border: 1px solid #555;
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--surface-card), var(--background-tertiary));
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
 }
 
 .info p {
-  color: #ccc;
+  color: var(--text-secondary);
   font-size: 14px;
   margin: 0;
+  line-height: 1.6;
+}
+
+.info p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-primary);
 }
 
 #integral-value {
-  color: #64ffda;
-  font-weight: bold;
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(6, 214, 160, 0.3);
+}
+
+#example-description {
+  margin-top: 12px;
+  font-style: italic;
+  color: var(--text-muted);
+  border-left: 3px solid var(--primary-color);
+  padding-left: 12px;
+  background: var(--background-tertiary);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
 }
 
 .instructions {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #333;
-  border-radius: 6px;
-  border: 1px solid #555;
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--surface-card), var(--background-tertiary));
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.instructions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
 .instructions h3 {
-  color: #fff;
-  margin-bottom: 10px;
-  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.instructions h3::before {
+  content: "💡";
+  font-size: 20px;
 }
 
 .instructions ul {
-  color: #ccc;
-  font-size: 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
   padding-left: 20px;
+  line-height: 1.6;
 }
 
 .instructions li {
-  margin-bottom: 5px;
-  line-height: 1.4;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.instructions li:hover {
+  color: var(--text-primary);
+}
+
+.instructions li::marker {
+  color: var(--primary-color);
 }
 
 #loading-indicator {
@@ -166,21 +386,113 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #fff;
+  color: var(--text-primary);
   z-index: 1000;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-xl);
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #333;
-  border-top: 4px solid #646cff;
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  border-right: 4px solid var(--accent-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto 20px;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+#loading-indicator p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+  }
+  
+  #controls {
+    width: 100%;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 2px solid var(--border-color);
+  }
+  
+  #canvas-container {
+    border-radius: 0;
+  }
+}
+
+/* 自定义滚动条 */
+#controls::-webkit-scrollbar {
+  width: 8px;
+}
+
+#controls::-webkit-scrollbar-track {
+  background: var(--background-tertiary);
+  border-radius: 4px;
+}
+
+#controls::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-color), var(--primary-dark));
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+#controls::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-light), var(--primary-color));
+}
+
+/* 添加动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.control-group {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.control-group:nth-child(1) { animation-delay: 0.1s; }
+.control-group:nth-child(2) { animation-delay: 0.2s; }
+.control-group:nth-child(3) { animation-delay: 0.3s; }
+.control-group:nth-child(4) { animation-delay: 0.4s; }
+.control-group:nth-child(5) { animation-delay: 0.5s; }
+
+/* 增强的焦点样式 */
+input:focus, select:focus, button:focus {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
 }
