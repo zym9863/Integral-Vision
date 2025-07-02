@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>积分视界 - Integral Vision</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="controls">
+        <h1>积分视界</h1>
+        <div class="control-group">
+          <label for="example-select">预设示例:</label>
+          <select id="example-select">
+            <option value="">选择示例...</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label for="function-input">函数 f(x,y):</label>
+          <input type="text" id="function-input" value="x*x + y*y" placeholder="例如: x*x + y*y">
+        </div>
+        <div class="control-group">
+          <label for="domain-input">积分域 D:</label>
+          <input type="text" id="domain-input" value="x*x + y*y <= 1" placeholder="例如: x*x + y*y <= 1">
+        </div>
+        <div class="control-group">
+          <label for="subdivision-slider">黎曼和分割数 (n = <span id="subdivision-value">10</span>):</label>
+          <input type="range" id="subdivision-slider" min="5" max="50" value="10" step="1">
+        </div>
+        <div class="control-group">
+          <button id="update-visualization">更新可视化</button>
+          <button id="toggle-riemann">切换黎曼和显示</button>
+        </div>
+        <div class="info">
+          <p>积分值近似: <span id="integral-value">计算中...</span></p>
+          <p id="example-description" style="margin-top: 10px; font-style: italic; color: #aaa;"></p>
+        </div>
+        <div class="instructions">
+          <h3>使用说明</h3>
+          <ul>
+            <li>选择预设示例或输入自定义函数</li>
+            <li>拖拽鼠标旋转视角，滚轮缩放</li>
+            <li>调整分割数观察黎曼和逼近过程</li>
+            <li>支持的函数: sin, cos, tan, exp, log, sqrt, abs</li>
+            <li>支持的运算符: +, -, *, /, ^(幂), &&(且), ||(或)</li>
+          </ul>
+        </div>
+      </div>
+      <div id="canvas-container">
+        <div id="loading-indicator" style="display: none;">
+          <div class="loading-spinner"></div>
+          <p>正在加载3D场景...</p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
